@@ -4,7 +4,8 @@
   "description": "Practice TDD approach, by implementing it to build a game of battleship",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "watch": "jest --watch *.js"
   },
   "repository": {
     "type": "git",
