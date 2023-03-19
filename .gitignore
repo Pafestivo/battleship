@@ -1,0 +1,4 @@
+.history
+.eslintignore
+.prettierignore
+node_modules
