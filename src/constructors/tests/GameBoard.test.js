@@ -1,4 +1,4 @@
-import GameBoard from "../constructors/GameBoard";
+import GameBoard from "../GameBoard";
 
 describe('Game Board', () => {
   let testGameBoard

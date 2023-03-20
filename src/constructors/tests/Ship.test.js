@@ -1,4 +1,4 @@
-import Ship from "../constructors/Ship"
+import Ship from "../Ship"
 
 describe('ship functions', () => {
   let ship
