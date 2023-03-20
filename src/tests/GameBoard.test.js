@@ -88,4 +88,24 @@ describe('Game Board', () => {
       expect(testGameBoard.board[0].ship.isSunk).toEqual(true)
     })
   })
+
+  describe('hasArmedShips', () => {
+
+    test("Return true when ships still alive", () => {
+      testGameBoard.placeShip([1,1], 'right', 1)
+      testGameBoard.placeShip([1,3], 'right', 2)
+      testGameBoard.receiveAttack([1, 1])
+      testGameBoard.receiveAttack([1, 3])
+      expect(testGameBoard.hasArmedShips()).toEqual(true)
+    })
+
+    test("return false when all ships sunk", () => {
+      testGameBoard.placeShip([1,1], 'right', 1)
+      testGameBoard.placeShip([1,3], 'right', 2)
+      testGameBoard.receiveAttack([1, 1])
+      testGameBoard.receiveAttack([1, 3])
+      testGameBoard.receiveAttack([2, 3])
+      expect(testGameBoard.hasArmedShips()).toEqual(false)
+    })
+  })
 })

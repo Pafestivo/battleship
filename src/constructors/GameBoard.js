@@ -2,6 +2,7 @@ import Ship from "./Ship"
 
 export default function GameBoard() {
   let board = []
+  let ships = []
   let gridSize = 100
   // initialize coordinates at 1,1
   let x = 1
@@ -49,6 +50,7 @@ export default function GameBoard() {
 
       // creates the ship
       const battleship = new Ship(len)
+      ships.push(battleship)
 
       for(let i = 0; i < len; i++) {
         // skips statement on first round to add the chosen coordinates
@@ -72,6 +74,8 @@ export default function GameBoard() {
 
         let chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coords[index]))
         chosenLocation.ship = battleship
+
+        // set ship boxes and adjacent boxes unavailable
         chosenLocation.available = false
         adjacentLocations.forEach(location => {
           let current = board.find(box => box.coordinates.every((coord, index) => coord === location[index]))
@@ -91,6 +95,14 @@ export default function GameBoard() {
       if(chosenLocation.ship) {
         chosenLocation.ship.hit()
       }
+    },
+
+    hasArmedShips() {
+      let armedShips = false
+      ships.forEach(ship => {
+        if(!ship.isSunk) armedShips = true
+      })
+      return armedShips
     }
   }
 }
