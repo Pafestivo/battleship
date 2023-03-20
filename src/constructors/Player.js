@@ -6,6 +6,7 @@ export default function Player(playerName) {
 
   return {
     name,
+    gameBoard,
     get board() {
       return gameBoard.board
     },
@@ -15,7 +16,7 @@ export default function Player(playerName) {
     },
 
     shoot(target, coord) {
-      return target.gameBoard.receiveAttack(coord)
+      target.gameBoard.receiveAttack(coord)
     }
   }
 }

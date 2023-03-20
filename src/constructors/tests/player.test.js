@@ -32,7 +32,6 @@ describe('Player Constructor', () => {
       player1.shoot(player2, [1,1])
       player1.shoot(player2, [2,1])
       player2.shoot(player1, [1,1])
-      expect(player1.shoot(player2, [1,1])).not.toEqual(undefined)
       expect(player1.board[0].ship.hits).toEqual(1)
       expect(player2.board[0].ship.hits).toEqual(2)
       expect(player2.board[0].ship.isSunk).toEqual(true)
