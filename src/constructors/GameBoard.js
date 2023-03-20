@@ -82,13 +82,14 @@ export default function GameBoard() {
 
     receiveAttack(coords) {
       const chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coords[index]))
-      if(chosenLocation === undefined) return
-
-      if(!chosenLocation.attacked) {
-        chosenLocation.attacked = true
-        if(chosenLocation.ship) {
-          chosenLocation.ship.hit()
-        }
+      // if the location is out of boundaries or was already attacked
+      if(chosenLocation === undefined || chosenLocation.attacked) return
+    
+      // mark location as attacked
+      chosenLocation.attacked = true
+      // hit ship if present
+      if(chosenLocation.ship) {
+        chosenLocation.ship.hit()
       }
     }
   }
