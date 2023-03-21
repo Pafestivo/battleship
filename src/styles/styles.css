@@ -42,6 +42,10 @@ body {
   background-color: #6200ff;
 }
 
+.contain-ship {
+  background-color: azure;
+}
+
 .attacked {
   background-color: #da2323;
   cursor: not-allowed;
@@ -50,3 +54,4 @@ body {
 .attacked:hover {
   background-color: #da2323;
 }
+

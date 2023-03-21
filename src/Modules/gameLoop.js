@@ -27,7 +27,7 @@ export default function gameLoop() {
     const box = document.createElement('div')
     box.id = `num${i}`
     box.classList.add('box')
-    if(player1.board[i].ship) box.classList.add('attacked')
+    if(player1.board[i].ship) box.classList.add('contain-ship')
     playerBoard.append(box)
   }
 
@@ -35,7 +35,7 @@ export default function gameLoop() {
   for(let i = 0; i < AI.board.length; i++) {
     const box = document.createElement('div')
     box.classList.add('box')
-    if(AI.board[i].ship) box.classList.add('attacked')
+    if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked
     box.addEventListener('click', () => {
@@ -45,10 +45,10 @@ export default function gameLoop() {
       player1.shoot(AI, AI.board[i].coordinates)
       box.classList.add('attacked')
 
-
       // then AI shoots back at random location
       const AIHit = player1.board.indexOf(AI.shoot(player1))
       document.querySelector(`#player-board > #num${AIHit}`).classList.add('attacked')
+      updateShipsDetails()
     })
     AIBoard.append(box)
   }
@@ -60,10 +60,10 @@ export default function gameLoop() {
   const AIState = document.querySelector('#AI-details p')
   playerName.textContent = player1.name
   AIName.textContent = AI.name
-  updateShips()
+  updateShipsDetails()
 
 
-  function updateShips() {
+  function updateShipsDetails() {
     playerState.textContent = `Ships alive: ${player1.gameBoard.ships.length - player1.gameBoard.sunkShips.length}`
 
     AIState.textContent = `Ships alive: ${AI.gameBoard.ships.length - AI.gameBoard.sunkShips.length}`
