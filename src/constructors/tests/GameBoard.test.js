@@ -86,6 +86,7 @@ describe('Game Board', () => {
       testGameBoard.receiveAttack([3, 1])
       expect(testGameBoard.board[0].ship.hits).toEqual(3)
       expect(testGameBoard.board[0].ship.isSunk).toEqual(true)
+      expect(testGameBoard.sunkShips.length).toBe(1)
     })
   })
 

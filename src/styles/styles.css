@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url(../assets/images/background.jpg);
+  color: white;
+}
+
+#page-title {
+  text-align: center;
+  margin-top: 65px;
+  font-size: 100px;
+}
+
+#game-container {
+  display: flex;
+  column-gap: 70px;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: max-content;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  background-color: #2389da;
+  margin-top: 50px;
+  width: 500px;
+  height: 500px;
+}
+
+.box {
+  border: 1px solid black;
+  cursor: crosshair;
+}
+
+.box:hover {
+  background-color: #6200ff;
+}
+
+.attacked {
+  background-color: #da2323;
+  cursor: not-allowed;
+}
+
+.attacked:hover {
+  background-color: #da2323;
+}

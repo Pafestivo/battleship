@@ -1,10 +1,14 @@
-export default function Ship(len) {
+export default function Ship(len, id = null) {
   const length = len
   let hits = 0
   let isSunk = false
   return {
     get length() {
       return length
+    },
+    
+    get id() {
+      return id
     },
 
     get hits() {

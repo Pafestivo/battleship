@@ -3,6 +3,7 @@ import Ship from "./Ship"
 export default function GameBoard() {
   let board = []
   let ships = []
+  let sunkShips = []
   let totalHits = 0
   let gridSize = 100
   // initialize coordinates at 1,1
@@ -33,6 +34,10 @@ export default function GameBoard() {
       return board
     },
 
+    get sunkShips() {
+      return sunkShips
+    },
+
     get totalHits() {
       return totalHits
     },
@@ -41,10 +46,10 @@ export default function GameBoard() {
       return ships
     },
 
-    placeShip(coords, direction, len) {
+    placeShip(coords, direction, len, id = null) {
       // check if ship stays within boundaries
       if(direction === 'right' && coords[0] + len > 10) return 'ship exceeding boundaries'
-      if(coords[1] + len > 10) return 'ship exceeding boundaries'
+      if(direction === 'up' && coords[1] - len < 1) return 'ship exceeding boundaries'
 
       let coordsCopy = [...coords]
 
@@ -59,7 +64,7 @@ export default function GameBoard() {
       }
 
       // creates the ship
-      const battleship = new Ship(len)
+      const battleship = new Ship(len, id)
       ships.push(battleship)
 
       for(let i = 0; i < len; i++) {
@@ -105,6 +110,10 @@ export default function GameBoard() {
       // hit ship if present
       if(chosenLocation.ship) {
         chosenLocation.ship.hit()
+        // if ship sunk, add to sunkShips
+        if(chosenLocation.ship.isSunk) {
+          sunkShips.push(chosenLocation.ship)
+        }
       }
     },
 
