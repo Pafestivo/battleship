@@ -34,7 +34,7 @@ export default function gameLoop() {
   // render the AI board
   for(let i = 0; i < AI.board.length; i++) {
     const box = document.createElement('div')
-    box.classList.add('box')
+    box.classList.add('AI-box', 'box')
     if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked

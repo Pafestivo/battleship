@@ -35,10 +35,13 @@ body {
 
 .box {
   border: 1px solid black;
+}
+
+.AI-box {
   cursor: crosshair;
 }
 
-.box:hover {
+.AI-box:hover {
   background-color: #6200ff;
 }
 
