@@ -38,7 +38,7 @@ export default function gameLoop() {
     box.id = `A${i}`
     box.classList.add('AI-box', 'box')
     // // shows ships on the board
-    // if(AI.board[i].ship) box.classList.add('contain-ship')
+    if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked
     box.addEventListener('click', () => {
