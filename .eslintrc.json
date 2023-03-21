@@ -28,7 +28,8 @@
         "no-alert": "off",
         "prefer-destructuring": "off",
         "no-restricted-syntax": "off",
-        "radix": "off"
+        "radix": "off",
+        "no-constant-condition": "off"
     }
   }
   

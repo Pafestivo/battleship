@@ -3,6 +3,7 @@ import Ship from "./Ship"
 export default function GameBoard() {
   let board = []
   let ships = []
+  let totalHits = 0
   let gridSize = 100
   // initialize coordinates at 1,1
   let x = 1
@@ -32,6 +33,14 @@ export default function GameBoard() {
       return board
     },
 
+    get totalHits() {
+      return totalHits
+    },
+
+    get ships() {
+      return ships
+    },
+
     placeShip(coords, direction, len) {
       // check if ship stays within boundaries
       if(direction === 'right' && coords[0] + len > 10) return 'ship exceeding boundaries'
@@ -45,6 +54,7 @@ export default function GameBoard() {
           else coordsCopy[1] --
         }
         let chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coordsCopy[index]))
+        if(!chosenLocation) return 'No such coordinates'
         if(!chosenLocation.available) return 'Some of the space is unavailable'
       }
 
@@ -91,6 +101,7 @@ export default function GameBoard() {
     
       // mark location as attacked
       chosenLocation.attacked = true
+      totalHits++
       // hit ship if present
       if(chosenLocation.ship) {
         chosenLocation.ship.hit()
