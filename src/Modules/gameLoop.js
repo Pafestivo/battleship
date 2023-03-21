@@ -25,8 +25,9 @@ export default function gameLoop() {
   // render the player board
   for(let i = 0; i < player.board.length; i++) {
     const box = document.createElement('div')
-    box.id = `num${i}`
+    box.id = `p${i}`
     box.classList.add('box')
+    // shows ships on the board
     if(player.board[i].ship) box.classList.add('contain-ship')
     playerBoard.append(box)
   }
@@ -34,7 +35,9 @@ export default function gameLoop() {
   // render the AI board
   for(let i = 0; i < AI.board.length; i++) {
     const box = document.createElement('div')
+    box.id = `A${i}`
     box.classList.add('AI-box', 'box')
+    // shows ships on the board
     if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked
@@ -43,13 +46,32 @@ export default function gameLoop() {
       if(AI.board[i].attacked) return
       // if not, shoot AI at location
       player.shoot(AI, AI.board[i].coordinates)
-      if(AI.board[i].ship) box.classList.add('ship-hit')
+      if(AI.board[i].ship) {
+        if(AI.board[i].ship.isSunk) {
+          box.classList.add('ship-hit')
+          AIBoard.style.backgroundColor = 'red'
+          setTimeout(() => {
+            AIBoard.style.backgroundColor = '#2389da'
+          }, 100)
+        } else {
+          box.classList.add('ship-hit')
+        }
+      }
       else box.classList.add('attacked')
 
       // then AI shoots back at random location
       const AIHit = player.board.indexOf(AI.shoot(player))
-      const targetBox = document.querySelector(`#player-board > #num${AIHit}`)
-      if(player.board[AIHit].ship) targetBox.classList.add('ship-hit')
+      const targetBox = document.querySelector(`#player-board > #p${AIHit}`)
+      if(player.board[AIHit].ship) {
+        if(player.board[AIHit].ship.isSunk) {
+          playerBoard.style.backgroundColor = 'red'
+          setTimeout(() => {
+            playerBoard.style.backgroundColor = '#2389da'
+          }, 100)
+        } else {
+          targetBox.classList.add('ship-hit') 
+        }
+      } 
       else targetBox.classList.add('attacked')
       updateShipsDetails()
     })
