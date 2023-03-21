@@ -43,11 +43,14 @@ export default function gameLoop() {
       if(AI.board[i].attacked) return
       // if not, shoot AI at location
       player.shoot(AI, AI.board[i].coordinates)
-      box.classList.add('attacked')
+      if(AI.board[i].ship) box.classList.add('ship-hit')
+      else box.classList.add('attacked')
 
       // then AI shoots back at random location
       const AIHit = player.board.indexOf(AI.shoot(player))
-      document.querySelector(`#player-board > #num${AIHit}`).classList.add('attacked')
+      const targetBox = document.querySelector(`#player-board > #num${AIHit}`)
+      if(player.board[AIHit].ship) targetBox.classList.add('ship-hit')
+      else targetBox.classList.add('attacked')
       updateShipsDetails()
     })
     AIBoard.append(box)

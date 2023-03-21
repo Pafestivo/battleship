@@ -67,3 +67,21 @@ body {
   background-color: #da2323;
 }
 
+.ship-hit {
+  background-color: #2354da;
+}
+
+.ship-hit::after {
+  position: absolute;
+  content: "\274c";
+  font-size: 40px; 
+  color: #FFF;
+}
+
+.ship-hit:hover {
+  cursor: not-allowed;
+  background-color: #2354da;
+}
+
+
+
