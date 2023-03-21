@@ -53,6 +53,7 @@ body {
 .details p {
   font-size: 30px;
   text-align: center;
+  transition: all 0.1s ease-in-out;
 }
 
 .contain-ship {

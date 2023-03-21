@@ -37,8 +37,8 @@ export default function gameLoop() {
     const box = document.createElement('div')
     box.id = `A${i}`
     box.classList.add('AI-box', 'box')
-    // shows ships on the board
-    if(AI.board[i].ship) box.classList.add('contain-ship')
+    // // shows ships on the board
+    // if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked
     box.addEventListener('click', () => {
@@ -50,8 +50,10 @@ export default function gameLoop() {
         if(AI.board[i].ship.isSunk) {
           box.classList.add('ship-hit')
           AIBoard.style.backgroundColor = 'red'
+          AIState.style.color = 'red'
           setTimeout(() => {
             AIBoard.style.backgroundColor = '#2389da'
+            AIState.style.color = '#fff'
           }, 100)
         } else {
           box.classList.add('ship-hit')
@@ -65,8 +67,10 @@ export default function gameLoop() {
       if(player.board[AIHit].ship) {
         if(player.board[AIHit].ship.isSunk) {
           playerBoard.style.backgroundColor = 'red'
+          playerState.style.color = 'red'
           setTimeout(() => {
             playerBoard.style.backgroundColor = '#2389da'
+            playerState.style.color = '#fff'
           }, 100)
         } else {
           targetBox.classList.add('ship-hit') 
