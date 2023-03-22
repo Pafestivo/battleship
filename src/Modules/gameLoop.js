@@ -35,7 +35,7 @@ export default function gameLoop() {
   // render the AI board
   for(let i = 0; i < AI.board.length; i++) {
     const box = document.createElement('div')
-    box.id = `A${i}`
+    box.id = AI.board[i].coordinates // set the id of the box to it's coordinates
     box.classList.add('AI-box', 'box')
     // // shows ships on the board
     if(AI.board[i].ship) box.classList.add('contain-ship')
@@ -47,16 +47,22 @@ export default function gameLoop() {
       // if not, shoot AI at location
       player.shoot(AI, AI.board[i].coordinates)
       if(AI.board[i].ship) {
+        box.classList.add('ship-hit')
         if(AI.board[i].ship.isSunk) {
-          box.classList.add('ship-hit')
           AIBoard.style.backgroundColor = 'red'
           AIState.style.color = 'red'
           setTimeout(() => {
             AIBoard.style.backgroundColor = '#2389da'
             AIState.style.color = '#fff'
           }, 100)
-        } else {
-          box.classList.add('ship-hit')
+          // mark adjacent as attacked
+          const shipCoords = AI.board[i].ship.shipCoordinates
+          shipCoords.forEach(coords => {
+            const adjacentBoxes = AI.gameBoard.getAdjacentBoxes(coords)
+            adjacentBoxes.forEach(adjacent => {
+              document.getElementById(adjacent.coordinates).classList.add('attacked')
+            })
+          })
         }
       }
       else box.classList.add('attacked')
@@ -65,6 +71,7 @@ export default function gameLoop() {
       const AIHit = player.board.indexOf(AI.shoot(player))
       const targetBox = document.querySelector(`#player-board > #p${AIHit}`)
       if(player.board[AIHit].ship) {
+        targetBox.classList.add('ship-hit') 
         if(player.board[AIHit].ship.isSunk) {
           playerBoard.style.backgroundColor = 'red'
           playerState.style.color = 'red'
@@ -72,8 +79,19 @@ export default function gameLoop() {
             playerBoard.style.backgroundColor = '#2389da'
             playerState.style.color = '#fff'
           }, 100)
-        } else {
-          targetBox.classList.add('ship-hit') 
+          // mark adjacent as attacked
+          const shipCoords = player.board[AIHit].ship.shipCoordinates
+          shipCoords.forEach(coords => {
+            const adjacentBoxes = player.gameBoard.getAdjacentBoxes(coords)
+            adjacentBoxes.forEach(adjacent => {
+              // find the correct box in the array corresponding to the coord
+              const currentBox = player.board.find(item => item.coordinates.every((coord, index) => coord === adjacent.coordinates[index]))
+              // get the index of this box
+              const currentBoxIndex = player.board.indexOf(currentBox)
+              // use selector to select the box with the index as it's id
+              document.getElementById(`p${currentBoxIndex}`).classList.add('attacked')
+            })
+          })
         }
       } 
       else targetBox.classList.add('attacked')

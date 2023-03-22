@@ -67,6 +67,17 @@ export default function GameBoard() {
       const battleship = new Ship(len, id)
       ships.push(battleship)
 
+      // add the ship coordinates to the ship object
+      let coordinatesCopy = [...coords]
+      for(let i = 0; i < len; i++) {
+        let currentCoords = [...coordinatesCopy]
+
+        if(direction === 'right') coordinatesCopy[0]++
+        else coordinatesCopy[1]--
+
+        battleship.addCoordinates(currentCoords)
+      }
+
       for(let i = 0; i < len; i++) {
         // skips statement on first round to add the chosen coordinates
         if(i !== 0) {
@@ -76,19 +87,21 @@ export default function GameBoard() {
         }
 
         // make an array containing all of the adjacent locations
+        let [a, b] = coords;
         let adjacentLocations = [
-          [coords[0] - 1, coords[1]],
-          [coords[0] + 1, coords[1]],
-          [coords[0] - 1, coords[1] + 1],
-          [coords[0] - 1, coords[1] - 1],
-          [coords[0] + 1, coords[1] - 1],
-          [coords[0] + 1, coords[1] + 1],
-          [coords[0], coords[1] + 1],
-          [coords[0], coords[1] - 1]
-        ]
+          [a - 1, b],
+          [a + 1, b],
+          [a - 1, b + 1],
+          [a - 1, b - 1],
+          [a + 1, b + 1],
+          [a + 1, b - 1],
+          [a, b + 1],
+          [a, b - 1]
+        ];
 
         let chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coords[index]))
         chosenLocation.ship = battleship
+        chosenLocation.ship.coordinates = chosenLocation.coordinates
 
         // set ship boxes and adjacent boxes unavailable
         chosenLocation.available = false
@@ -117,6 +130,26 @@ export default function GameBoard() {
       }
     },
 
+    // return the adjacent locations
+    getAdjacentBoxes(coords) {
+      const [a, b] = coords;
+      const adjacentLocations = [
+        [a - 1, b],
+        [a + 1, b],
+        [a - 1, b + 1],
+        [a - 1, b - 1],
+        [a + 1, b + 1],
+        [a + 1, b - 1],
+        [a, b + 1],
+        [a, b - 1]
+      ];
+      const adjacentBoxes = adjacentLocations.map(location => {
+        const adjacentBox = this.board.find(box => box.coordinates.every((coord, index) => coord === location[index]));
+        return adjacentBox;
+      });
+      return adjacentBoxes.filter(box => box !== undefined);
+    },
+    
     hasArmedShips() {
       let armedShips = false
       ships.forEach(ship => {
