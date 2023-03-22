@@ -29,7 +29,8 @@
         "prefer-destructuring": "off",
         "no-restricted-syntax": "off",
         "radix": "off",
-        "no-constant-condition": "off"
+        "no-constant-condition": "off",
+        "no-loop-func": "off"
     }
   }
   

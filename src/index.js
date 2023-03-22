@@ -1,8 +1,15 @@
-import gameLoop from "./Modules/gameLoop";
+import prepareGame from "./Modules/prepareGame";
+import AIplayer from "./constructors/AIplayer";
+import Player from "./constructors/Player";
 import './styles/styles.css'
 import './styles/winner-overlay.css'
+import './styles/prepare-game.css'
 
-gameLoop()
+// create the players
+const player = Player('player')
+const AI = AIplayer()
+
+prepareGame(player, AI)
 
 const playAgain = document.querySelector('.winner-overlay > p')
 

@@ -1,26 +1,18 @@
-import AIplayer from "../constructors/AIplayer";
-import Player from "../constructors/Player";
-
-export default function gameLoop() {
-  // create the players
-  const player = Player('player')
-  const AI = AIplayer()
-
-  // create the ships manually for testing
-  player.placeShip([1,1], 'right', 1)
-  player.placeShip([1,3], 'right', 2)
-  player.placeShip([1,5], 'right', 3)
-  player.placeShip([1,7], 'right', 4)
-  player.placeShip([1,9], 'right', 5)
-  player.placeShip([10,10], 'up', 6)
-  AI.placeShip(1) 
-  AI.placeShip(2) 
-  AI.placeShip(5) 
-  AI.placeShip(5) 
+export default function startGame(player, AI) {
 
   // select the containers of each board
   const playerBoard = document.getElementById('player-board')
   const AIBoard = document.getElementById('AI-board')
+
+
+  // hide place your ships title, reveal AI board
+  const placeShipsTitle = document.querySelector('.player > h1')
+  const AISide = document.querySelector('#AI-player')
+  placeShipsTitle.classList.add('hidden')
+  AISide.classList.remove('hidden')
+
+  // reset the player board
+  playerBoard.innerHTML = ""
 
   // render the player board
   for(let i = 0; i < player.board.length; i++) {

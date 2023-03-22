@@ -48,7 +48,7 @@ export default function GameBoard() {
 
     placeShip(coords, direction, len, id = null) {
       // check if ship stays within boundaries
-      if(direction === 'right' && coords[0] + len > 10) return 'ship exceeding boundaries'
+      if(direction === 'right' && coords[0] + len > 11) return 'ship exceeding boundaries'
       if(direction === 'up' && coords[1] - len < 1) return 'ship exceeding boundaries'
 
       let coordsCopy = [...coords]

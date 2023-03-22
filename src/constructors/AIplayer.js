@@ -3,8 +3,7 @@ import GameBoard from "./GameBoard";
 export default function AIplayer() {
   const name = 'AI'
   const gameBoard = new GameBoard()
-  // make a copy of the board array
-  // const boardArrayCopy = [...gameBoard.board]
+  let allShipsPlaced = true
 
   return {
     name,
@@ -15,7 +14,10 @@ export default function AIplayer() {
 
     placeShip(len) {
       const id = crypto.randomUUID()
-      while(true) {
+      // limit the amount of attempts
+      let attempts = 0
+      while(attempts < 1000) {
+        attempts++
         // declare empty coords array
         let coords = []
 
@@ -40,11 +42,12 @@ export default function AIplayer() {
         // check if ship is present at the location
         if(location.ship != null) {
           // check if its the ship we just created
-          if(location.ship.id === id) return
+          if(location.ship.id === id) {
+            allShipsPlaced = true
+            return
+          }
         }
-
-        // if not, repeat
-      }  
+      }
     },
 
     shoot(target) {
