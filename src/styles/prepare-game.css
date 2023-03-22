@@ -35,6 +35,10 @@
   font-size: 25px;
 }
 
+.pre-game {
+  cursor: pointer;
+}
+
 .hidden {
   display: none
 }
