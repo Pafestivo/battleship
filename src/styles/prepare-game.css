@@ -30,6 +30,11 @@
   background-color: rgb(199, 199, 199);
 }
 
+#length-indicator {
+  text-align: center;
+  font-size: 25px;
+}
+
 .hidden {
   display: none
 }

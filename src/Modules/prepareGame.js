@@ -3,6 +3,7 @@ import startGame from "./startGame";
 export default function prepareGame(player, AI) {
 
   const playerBoard = document.getElementById('player-board')
+  const lengthIndicator = document.getElementById('ship-length')
   const shipLens = [5, 5, 3, 2, 2, 2, 1]
   let direction = 'right'
   let currentShip = 0
@@ -64,6 +65,7 @@ export default function prepareGame(player, AI) {
       // check if ship really placed
       if(player.gameBoard.ships.length > currentShip) {
         currentShip++
+        lengthIndicator.textContent = shipLens[currentShip]
         // if it's placed, changed highlighted squares to ship squares
         const highlightedSquares = document.querySelectorAll('.highlight')
         highlightedSquares.forEach(square => {

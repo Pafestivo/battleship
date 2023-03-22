@@ -7,12 +7,14 @@ export default function startGame(player, AI) {
   pageTitle.classList.add('mobile-hidden')
 
 
-  // hide place your ships title, reveal AI board
+  // hide pre-game titles, show AI board
   const placeShipsTitle = document.querySelector('.player > h1')
   const changeDirectionBtn = document.querySelector('.direction')
+  const lengthIndicator = document.getElementById('length-indicator')
   const AISide = document.querySelector('#AI-player')
   placeShipsTitle.classList.add('hidden')
   changeDirectionBtn.classList.add('hidden')
+  lengthIndicator.classList.add('hidden')
   AISide.classList.remove('hidden')
 
   // reset the player board
