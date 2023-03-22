@@ -46,15 +46,17 @@ export default function gameLoop() {
       if(AI.board[i].attacked) return
       // if not, shoot AI at location
       player.shoot(AI, AI.board[i].coordinates)
+      // if ship got hit
       if(AI.board[i].ship) {
         box.classList.add('ship-hit')
+        // if ship sunk
         if(AI.board[i].ship.isSunk) {
           AIBoard.style.backgroundColor = 'red'
           AIState.style.color = 'red'
           setTimeout(() => {
             AIBoard.style.backgroundColor = '#2389da'
             AIState.style.color = '#fff'
-          }, 100)
+          }, 50)
           // mark adjacent as attacked
           const shipCoords = AI.board[i].ship.shipCoordinates
           shipCoords.forEach(coords => {
@@ -63,6 +65,8 @@ export default function gameLoop() {
               document.getElementById(adjacent.coordinates).classList.add('attacked')
             })
           })
+          // check if game is over
+          isGameOver()
         }
       }
       else box.classList.add('attacked')
@@ -70,15 +74,17 @@ export default function gameLoop() {
       // then AI shoots back at random location
       const AIHit = player.board.indexOf(AI.shoot(player))
       const targetBox = document.querySelector(`#player-board > #p${AIHit}`)
+      // if ship got hit
       if(player.board[AIHit].ship) {
         targetBox.classList.add('ship-hit') 
+        // if ship sunk
         if(player.board[AIHit].ship.isSunk) {
           playerBoard.style.backgroundColor = 'red'
           playerState.style.color = 'red'
           setTimeout(() => {
             playerBoard.style.backgroundColor = '#2389da'
             playerState.style.color = '#fff'
-          }, 100)
+          }, 50)
           // mark adjacent as attacked
           const shipCoords = player.board[AIHit].ship.shipCoordinates
           shipCoords.forEach(coords => {
@@ -92,6 +98,8 @@ export default function gameLoop() {
               document.getElementById(`p${currentBoxIndex}`).classList.add('attacked')
             })
           })
+          // check if game is over
+          isGameOver()
         }
       } 
       else targetBox.classList.add('attacked')
@@ -112,7 +120,27 @@ export default function gameLoop() {
 
   function updateShipsDetails() {
     playerState.textContent = `Ships alive: ${player.gameBoard.ships.length - player.gameBoard.sunkShips.length}`
-
     AIState.textContent = `Ships alive: ${AI.gameBoard.ships.length - AI.gameBoard.sunkShips.length}`
+  }
+
+  function isGameOver() {
+    const overlay = document.querySelector('.overlay')
+    const winnerOverlay = document.querySelector('.winner-overlay')
+    const winnerName = document.querySelector('.winner-overlay > h1')
+
+    // if player has no more ships alive
+    if(player.gameBoard.ships.length === player.gameBoard.sunkShips.length) {
+      // computer wins
+      overlay.style.display = 'block'
+      winnerName.textContent = 'Computer won!'
+      winnerOverlay.style.display = 'flex'
+    }
+    // if computer has no more ships alive
+    else if(AI.gameBoard.ships.length === AI.gameBoard.sunkShips.length) {
+      // player wins
+      overlay.style.display = 'block'
+      winnerName.textContent = 'Player won!'
+      winnerOverlay.style.display = 'flex'
+    }
   }
 }

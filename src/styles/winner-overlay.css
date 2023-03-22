@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.winner-overlay {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url(../assets/images/background.jpg);
+  width: 600px;
+  height: 300px;
+  box-shadow: 2px 0px 10px #242424;
+}
+
+.winner-overlay h1 {
+  font-size: 60px
+}
+
+.winner-overlay p {
+  background-color: #2389da;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+
+.winner-overlay p:hover {
+  background-color: #6200ff;
+}
+
