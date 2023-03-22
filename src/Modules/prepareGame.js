@@ -60,10 +60,7 @@ export default function prepareGame(player, AI) {
       hoveredCoords.push(+hoveredCoordsString[1])
       
       // try to place ship
-      console.log(player.placeShip(hoveredCoords, direction, shipLens[currentShip]))
-      console.log(hoveredCoords)
-      console.log(direction)
-      console.log(shipLens[currentShip])
+      player.placeShip(hoveredCoords, direction, shipLens[currentShip])
       // check if ship really placed
       if(player.gameBoard.ships.length > currentShip) {
         currentShip++

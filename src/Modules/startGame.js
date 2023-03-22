@@ -7,8 +7,10 @@ export default function startGame(player, AI) {
 
   // hide place your ships title, reveal AI board
   const placeShipsTitle = document.querySelector('.player > h1')
+  const changeDirectionBtn = document.querySelector('.direction')
   const AISide = document.querySelector('#AI-player')
   placeShipsTitle.classList.add('hidden')
+  changeDirectionBtn.classList.add('hidden')
   AISide.classList.remove('hidden')
 
   // reset the player board
