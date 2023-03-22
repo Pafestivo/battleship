@@ -5,10 +5,31 @@
 .player h1 {
   text-align: center;
   font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.direction {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .player h2 {
-  text-align: center;
   font-size: 30px;
-  margin-bottom: 10px;
+}
+
+.rotate {
+  background-color: white;
+  color: black;
+  margin: 0 0 10px 10px;
+  width: max-content;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.rotate:hover {
+  background-color: rgb(199, 199, 199);
 }

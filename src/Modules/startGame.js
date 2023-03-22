@@ -29,8 +29,6 @@ export default function startGame(player, AI) {
     const box = document.createElement('div')
     box.id = AI.board[i].coordinates // set the id of the box to it's coordinates
     box.classList.add('AI-box', 'box')
-    // // shows ships on the board
-    if(AI.board[i].ship) box.classList.add('contain-ship')
 
     // when box is clicked
     box.addEventListener('click', () => {

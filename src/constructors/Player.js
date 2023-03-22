@@ -12,7 +12,7 @@ export default function Player(playerName) {
     },
 
     placeShip(coord, direction, len) {
-      gameBoard.placeShip(coord, direction, len)
+      return gameBoard.placeShip(coord, direction, len)
     },
 
     shoot(target, coord) {

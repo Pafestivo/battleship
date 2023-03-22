@@ -30,7 +30,7 @@ export default function AIplayer() {
         coords.push(y)
 
         // pick random direction
-        const possibleDirections = ['right', 'up']
+        const possibleDirections = ['right', 'down']
         const randomDirection = possibleDirections[Math.floor(Math.random() * possibleDirections.length)]
 
         // try to place ship

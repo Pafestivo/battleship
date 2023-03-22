@@ -49,14 +49,14 @@ export default function GameBoard() {
     placeShip(coords, direction, len, id = null) {
       // check if ship stays within boundaries
       if(direction === 'right' && coords[0] + len > 11) return 'ship exceeding boundaries'
-      if(direction === 'up' && coords[1] - len < 1) return 'ship exceeding boundaries'
+      if(direction === 'down' && coords[1] + len > 11) return 'ship exceeding boundaries'
 
       let coordsCopy = [...coords]
 
       for(let i = 0; i < len; i++) {
         if(i !== 0) {
           if(direction === 'right') coordsCopy[0]++
-          else coordsCopy[1] --
+          else coordsCopy[1] ++
         }
         let chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coordsCopy[index]))
         if(!chosenLocation) return 'No such coordinates'
@@ -73,7 +73,7 @@ export default function GameBoard() {
         let currentCoords = [...coordinatesCopy]
 
         if(direction === 'right') coordinatesCopy[0]++
-        else coordinatesCopy[1]--
+        else coordinatesCopy[1]++
 
         battleship.addCoordinates(currentCoords)
       }
@@ -83,7 +83,7 @@ export default function GameBoard() {
         if(i !== 0) {
           // continue moving in the chosen direction
           if(direction === 'right') coords[0]++
-          else coords[1]--
+          else coords[1]++
         }
 
         // make an array containing all of the adjacent locations
