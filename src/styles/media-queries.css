@@ -1,0 +1,41 @@
+@media only screen and (max-width: 1000px) {
+  #page-title {
+    margin-top: 30px;
+    font-size: 75px;
+  }
+
+  #game-container {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .player h1 {
+    font-size: 30px
+  }
+
+  .player h2 {
+    font-size: 20px;
+  }
+
+  .rotate {
+    font-size: 15px;
+    padding: 3px 15px;
+  }
+
+  .board {
+    margin: 0 auto;
+    width: 350px;
+    height: 350px;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+
+  .ship-hit::after {
+    position: absolute;
+    content: "\274c";
+    font-size: 27px; 
+    color: #FFF;
+  }
+}

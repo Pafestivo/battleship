@@ -3,6 +3,8 @@ export default function startGame(player, AI) {
   // select the containers of each board
   const playerBoard = document.getElementById('player-board')
   const AIBoard = document.getElementById('AI-board')
+  const pageTitle = document.getElementById('page-title')
+  pageTitle.classList.add('mobile-hidden')
 
 
   // hide place your ships title, reveal AI board
@@ -106,7 +108,9 @@ export default function startGame(player, AI) {
   const playerState = document.querySelector('#player-details p')
   const AIState = document.querySelector('#AI-details p')
   playerName.textContent = player.name
+  playerName.classList.add('mobile-hidden')
   AIName.textContent = AI.name
+  AIName.classList.add('mobile-hidden')
   updateShipsDetails()
 
 
