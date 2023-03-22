@@ -1,6 +1,7 @@
 import startGame from "./startGame";
 
 export default function prepareGame(player, AI) {
+
   const playerBoard = document.getElementById('player-board')
   const shipLens = [5, 5, 3, 2, 2, 2, 1]
   let direction = 'right'
@@ -52,7 +53,17 @@ export default function prepareGame(player, AI) {
           square.classList.add('contain-ship')
         })
       }
-      if(!shipLens[currentShip]) startGame(player, AI)
+      if(!shipLens[currentShip]) {
+        // create AI ships and start game
+        AI.placeShip(1) 
+        AI.placeShip(2) 
+        AI.placeShip(2) 
+        AI.placeShip(2) 
+        AI.placeShip(3) 
+        AI.placeShip(5) 
+        AI.placeShip(5) 
+        startGame(player, AI)
+      }
     })
     playerBoard.append(box)
   }
