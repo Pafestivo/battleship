@@ -59,6 +59,7 @@ export default function startGame(player, AI) {
             const adjacentBoxes = AI.gameBoard.getAdjacentBoxes(coords)
             adjacentBoxes.forEach(adjacent => {
               document.getElementById(adjacent.coordinates).classList.add('attacked')
+              adjacent.attacked = true
             })
           })
           // check if game is over
@@ -92,6 +93,7 @@ export default function startGame(player, AI) {
               const currentBoxIndex = player.board.indexOf(currentBox)
               // use selector to select the box with the index as it's id
               document.getElementById(`p${currentBoxIndex}`).classList.add('attacked')
+              adjacent.attacked = true
             })
           })
           // check if game is over
