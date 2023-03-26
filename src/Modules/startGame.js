@@ -4,9 +4,22 @@ export default async function startGame(player, AI) {
 
     // add a placeholder to the hits array in the server
     await getHits(checkIfEmpty)
-    function checkIfEmpty(data) {
-      if(data.length === 0) {
+    function checkIfEmpty(hits) {
+      if(hits.length === 0) {
         AddPlaceHolder([], [])
+      } else {
+        // convert objects to arrays
+        const hitsArray = Object.values(hits[0])
+        const playerHits = Object.values(hitsArray[0])
+        const AIHits = Object.values(hitsArray[1])
+
+        playerHits.forEach(hit => {
+          player.gameBoard.receiveAttack([hit[0], hit[1]])
+        })
+
+        AIHits.forEach(hit => {
+          AI.gameBoard.receiveAttack([hit[0], hit[1]])
+        })
       }
     }
 
@@ -38,6 +51,11 @@ export default async function startGame(player, AI) {
     box.classList.add('box')
     // shows ships on the board
     if(player.board[i].ship) box.classList.add('contain-ship')
+
+    // mark attacked boxes
+    if(player.board[i].attacked) box.classList.add('attacked')
+    if(player.board[i].attacked && player.board[i].ship) box.classList.add('ship-hit')
+
     playerBoard.append(box)
   }
 
@@ -46,6 +64,10 @@ export default async function startGame(player, AI) {
     const box = document.createElement('div')
     box.id = AI.board[i].coordinates // set the id of the box to it's coordinates
     box.classList.add('AI-box', 'box')
+
+    // mark attacked boxes
+    if(AI.board[i].attacked) box.classList.add('attacked')
+    if(AI.board[i].attacked && AI.board[i].ship) box.classList.add('ship-hit')
 
     // when box is clicked
     box.addEventListener('click', async () => {
@@ -70,7 +92,7 @@ export default async function startGame(player, AI) {
             const adjacentBoxes = AI.gameBoard.getAdjacentBoxes(coords)
             adjacentBoxes.forEach(adjacent => {
               document.getElementById(adjacent.coordinates).classList.add('attacked')
-              adjacent.attacked = true
+              AI.gameBoard.receiveAttack(adjacent.coordinates)
             })
           })
           // check if game is over
@@ -105,12 +127,13 @@ export default async function startGame(player, AI) {
               const currentBoxIndex = player.board.indexOf(currentBox)
               // use selector to select the box with the index as it's id
               document.getElementById(`p${currentBoxIndex}`).classList.add('attacked')
-              adjacent.attacked = true
+              // adjacent.attacked = true
+              player.gameBoard.receiveAttack(adjacent.coordinates)
             })
           })
           // check if game is over
           isGameOver()
-          updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
+          await updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
         }
       } 
       else targetBox.classList.add('attacked')
