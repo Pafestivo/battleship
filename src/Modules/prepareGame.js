@@ -1,6 +1,42 @@
 import startGame from "./startGame";
+import { addShipToAPI, getShips, deleteShip } from "./mockAPI";
 
-export default function prepareGame(player, AI) {
+export default async function prepareGame(player, AI) {
+
+  // if game is already in progress, skip the preparation part
+  await getShips(check)
+  function check(ships) {
+    // if for some reason there are more than 2 arrays, remove to make it 2
+    if(ships.length > 2) {
+      for(let i = ships.length; i >= 2; i--) {
+        deleteShip(i)
+        ships.pop()
+        console.log(ships.length)
+      }
+    }
+
+    if(ships.length === 2) {
+      // convert objects to arrays
+      const playerShips = Object.values(ships[0])
+      const AIShips = Object.values(ships[1])
+      // remove the ID property
+      playerShips.pop()
+      AIShips.pop()
+
+      // place player ships
+      playerShips.forEach(ship => {
+        player.placeShip(ship.shipCoordinates[0], ship.direction, ship.length)
+      })
+
+      // place AI ships
+      AIShips.forEach(ship => {
+        AI.placeShip(ship.shipCoordinates[0], ship.direction, ship.length)
+      })
+      
+      // start game without preparation
+      startGame(player, AI)
+    } 
+  }
 
   const playerBoard = document.getElementById('player-board')
   const lengthIndicator = document.getElementById('ship-length')
@@ -73,35 +109,20 @@ export default function prepareGame(player, AI) {
         })
       }
       if(!shipLens[currentShip]) {
+        addShipToAPI(player.gameBoard.ships)
         // create AI ships and start game
-        AI.placeShip(1) 
-        AI.placeShip(2) 
-        AI.placeShip(2) 
-        AI.placeShip(2) 
-        AI.placeShip(3) 
-        AI.placeShip(5) 
-        AI.placeShip(5) 
+        AI.placeRandomShip(1) 
+        AI.placeRandomShip(2) 
+        AI.placeRandomShip(2) 
+        AI.placeRandomShip(2) 
+        AI.placeRandomShip(3) 
+        AI.placeRandomShip(5) 
+        AI.placeRandomShip(5) 
+        addShipToAPI(AI.gameBoard.ships)
         startGame(player, AI)
       }
     })
     playerBoard.append(box)
   }
   const allBoxes = document.querySelectorAll('.pre-game')
-
-  // create the ships manually for testing
-  // player.placeShip([1,1], 'right', 1)
-  // player.placeShip([1,3], 'right', 2)
-  // player.placeShip([1,5], 'right', 3)
-  // player.placeShip([1,7], 'right', 4)
-  // player.placeShip([1,9], 'right', 5)
-  // player.placeShip([10,10], 'down', 6)
-  // AI.placeShip(1) 
-  // AI.placeShip(2) 
-  // AI.placeShip(2) 
-  // AI.placeShip(2) 
-  // AI.placeShip(3) 
-  // AI.placeShip(5) 
-  // AI.placeShip(5) 
-
-  // gameLoop(player, AI)
 }

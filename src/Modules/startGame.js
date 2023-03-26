@@ -1,4 +1,14 @@
-export default function startGame(player, AI) {
+import { updateHitsApi, getHits, AddPlaceHolder } from "./mockAPI"
+
+export default async function startGame(player, AI) {
+
+    // add a placeholder to the hits array in the server
+    await getHits(checkIfEmpty)
+    function checkIfEmpty(data) {
+      if(data.length === 0) {
+        AddPlaceHolder([], [])
+      }
+    }
 
   // select the containers of each board
   const playerBoard = document.getElementById('player-board')
@@ -19,6 +29,7 @@ export default function startGame(player, AI) {
 
   // reset the player board
   playerBoard.innerHTML = ""
+  AIBoard.innerHTML = ""
 
   // render the player board
   for(let i = 0; i < player.board.length; i++) {
@@ -37,7 +48,7 @@ export default function startGame(player, AI) {
     box.classList.add('AI-box', 'box')
 
     // when box is clicked
-    box.addEventListener('click', () => {
+    box.addEventListener('click', async () => {
       // do nothing if it's already attacked
       if(AI.board[i].attacked) return
       // if not, shoot AI at location
@@ -64,6 +75,7 @@ export default function startGame(player, AI) {
           })
           // check if game is over
           isGameOver()
+          await updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
         }
       }
       else box.classList.add('attacked')
@@ -98,6 +110,7 @@ export default function startGame(player, AI) {
           })
           // check if game is over
           isGameOver()
+          updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
         }
       } 
       else targetBox.classList.add('attacked')

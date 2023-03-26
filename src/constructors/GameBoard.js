@@ -4,6 +4,7 @@ export default function GameBoard() {
   let board = []
   let ships = []
   let sunkShips = []
+  let hitLocations = []
   let totalHits = 0
   let gridSize = 100
   // initialize coordinates at 1,1
@@ -34,6 +35,10 @@ export default function GameBoard() {
       return board
     },
 
+    get hitLocations() {
+      return hitLocations
+    },
+
     get sunkShips() {
       return sunkShips
     },
@@ -44,6 +49,10 @@ export default function GameBoard() {
 
     get ships() {
       return ships
+    },
+
+    set ships(newValue) {
+      ships = newValue
     },
 
     placeShip(coords, direction, len, id = null) {
@@ -64,7 +73,7 @@ export default function GameBoard() {
       }
 
       // creates the ship
-      const battleship = new Ship(len, id)
+      const battleship = new Ship(len, direction, id)
       ships.push(battleship)
 
       // add the ship coordinates to the ship object
@@ -128,6 +137,7 @@ export default function GameBoard() {
           sunkShips.push(chosenLocation.ship)
         }
       }
+      hitLocations.push(coords)
     },
 
     // return the adjacent locations

@@ -24,7 +24,11 @@ export default function AIplayer() {
       return gameBoard.board
     },
 
-    placeShip(len) {
+    placeShip(coord, direction, len) {
+      return gameBoard.placeShip(coord, direction, len)
+    },
+
+    placeRandomShip(len) {
       const id = crypto.randomUUID()
       // limit the amount of attempts
       let attempts = 0

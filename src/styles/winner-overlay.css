@@ -28,7 +28,8 @@
   font-size: 60px
 }
 
-.winner-overlay p {
+.winner-overlay button {
+  border-style: none;
   background-color: #2389da;
   border-radius: 5px;
   font-size: 20px;
@@ -36,7 +37,16 @@
   cursor: pointer;
 }
 
-.winner-overlay p:hover {
+.winner-overlay button:hover {
   background-color: #6200ff;
+}
+
+.winner-overlay button:disabled {
+  color: rgb(39, 39, 39);
+}
+
+.winner-overlay button:disabled:hover {
+  background-color: #2389da;
+  cursor: wait;
 }
 
