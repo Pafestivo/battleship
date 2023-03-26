@@ -73,7 +73,12 @@ function AddPlaceHolder() {
 
 async function updateHitsApi(playerHits, AIhits) {
   const payload = JSON.stringify([playerHits, AIhits])
-  await deleteLocations(1)
+  await getHits(erase)
+  function erase(hits) {
+    for(let i = 0; i <= hits.length; i++) {
+      if(hits[i]) deleteLocations(hits[i].id)
+    }
+  }
 
   return fetch(hitsUrl, {
     method: "POST",

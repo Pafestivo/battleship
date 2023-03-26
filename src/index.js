@@ -24,6 +24,7 @@ const AIBoard = document.getElementById('AI-board')
 playAgain.addEventListener('click', async () => {
   playAgain.setAttribute("disabled", true)
   await deleteShip(1)
+  await deleteLocations(1)
   overlay.style.display = 'none'
   winnerOverlay.style.display = 'none'
   playAgain.removeAttribute("disabled")
@@ -35,5 +36,4 @@ function restartGame() {
   playerBoard.innerHTML = ""
   AIBoard.innerHTML = ""
   window.location.reload()
-  deleteLocations(1)
 }
