@@ -1,7 +1,7 @@
 import prepareGame from "./Modules/prepareGame";
 import AIplayer from "./constructors/AIplayer";
 import Player from "./constructors/Player";
-import { deleteShip, deleteLocations } from "./Modules/mockAPI";
+import { deleteShip, deleteLocations, getHits, getShips } from "./Modules/mockAPI";
 import './styles/styles.css'
 import './styles/winner-overlay.css'
 import './styles/prepare-game.css'
@@ -19,21 +19,39 @@ const winnerOverlay = document.querySelector('.winner-overlay')
 const playerBoard = document.getElementById('player-board')
 const AIPlayer = document.querySelector('#AI-player')
 const AIBoard = document.getElementById('AI-board')
+const restartBtn = document.querySelector('#restart')
 
 
-playAgain.addEventListener('click', async () => {
+playAgain.addEventListener('click', resetGame)
+
+restartBtn.addEventListener('click', resetGame)
+
+async function resetGame() {
+  // disable the buttons
   playAgain.setAttribute("disabled", true)
-  await deleteShip(1)
-  await deleteLocations(1)
-  overlay.style.display = 'none'
-  winnerOverlay.style.display = 'none'
-  playAgain.removeAttribute("disabled")
-  restartGame()
-})
+  restartBtn.setAttribute("disabled", true)
 
-function restartGame() {
-  AIPlayer.classList.add('hidden')
-  playerBoard.innerHTML = ""
-  AIBoard.innerHTML = ""
-  window.location.reload()
+  // delete the ships
+  await getShips(remove)
+  async function remove(ships) {
+    for(let i = 0; i <= ships.length; i++) {
+      if(ships[i]) deleteShip(ships[i].id)
+    }
+  }
+  
+  // delete the hits
+  await getHits(erase)
+  async function erase(hits) {
+    for(let i = 0; i <= hits.length; i++) {
+      if(hits[i]) deleteLocations(hits[i].id)
+    }
+  }
+
+  // re-enable buttons and restart game
+  playAgain.removeAttribute("disabled")
+  restartBtn.removeAttribute("disabled")
+  setTimeout(() => {
+    window.location.reload()
+  }, 700)
+  
 }

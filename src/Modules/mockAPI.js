@@ -24,7 +24,7 @@ function addShipToAPI(shipData) {
 
 function getShips(callback) {
 
-  fetch(shipsUrl, {
+  return fetch(shipsUrl, {
     method: "GET",
     headers
   })
@@ -117,7 +117,6 @@ function deleteLocations(itemID) {
   })
   .then(response => {
     if (!response.ok) {
-      console.log(response)
       throw new Error("Network response was not ok");
     }
   })

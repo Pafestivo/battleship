@@ -35,10 +35,12 @@ export default async function startGame(player, AI) {
   const changeDirectionBtn = document.querySelector('.direction')
   const lengthIndicator = document.getElementById('length-indicator')
   const AISide = document.querySelector('#AI-player')
+  const restartBtn = document.querySelector('#restart')
   placeShipsTitle.classList.add('hidden')
   changeDirectionBtn.classList.add('hidden')
   lengthIndicator.classList.add('hidden')
   AISide.classList.remove('hidden')
+  restartBtn.classList.remove('hidden')
 
   // reset the player board
   playerBoard.innerHTML = ""
