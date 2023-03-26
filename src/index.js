@@ -4,6 +4,7 @@ import Player from "./constructors/Player";
 import './styles/styles.css'
 import './styles/winner-overlay.css'
 import './styles/prepare-game.css'
+import './styles/ship-list.css'
 import './styles/media-queries.css'
 
 // create the players

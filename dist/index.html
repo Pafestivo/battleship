@@ -12,25 +12,57 @@
 
   <div id="game-container">
     <div class="player">
-      <h1>Click to place your ships</h1>
-      <div class="direction">
-        <h2>Direction: <span id="direction-text">right</span></h2>
-        <p class="rotate">Rotate</p>
-      </div>
-      <h1 id="length-indicator">Current Ship Length: <span id="ship-length">5</span></h1>
       <div id="player-board" class="board"></div>
       <div id="player-details" class="details">
         <p></p>
         <h1></h1>
       </div>
-    </div>
+    </div> <!--/player-->
+
+    <div class="ship-list">
+      <h1>Drag ships to the board</h1>
+      <div id="len5" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len5" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len3" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len2" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len2" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len2" class="ship" draggable="true">
+        <div class="square"></div>
+        <div class="square"></div>
+      </div>
+      <div id="len1" class="ship" draggable="true">
+        <div class="square"></div>
+      </div>
+    </div><!--/ship-list-->
 
     <div id="AI-player" class="player hidden">
       <div id="AI-board" class="board"></div>
       <div id="AI-details" class="details">
         <p></p>
         <h1></h1>
-      </div>
+      </div><!--/AI-player-->
     </div>
   </div> <!--/game-container-->
 

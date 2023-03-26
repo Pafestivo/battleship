@@ -1,0 +1,24 @@
+.ship-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  background-color: #2389da;
+  width: 400px;
+  height: 500px;
+}
+
+.ship-list h1 {
+  text-align: center;
+}
+
+.ship {
+  display: flex;
+  
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+  background-color: azure;
+}
