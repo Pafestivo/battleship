@@ -66,6 +66,8 @@ export default function prepareGame(player, AI) {
   }
 
   function dragDrop(e) {
+    if(!beingDragged) return
+
     let minValue = 0
     let maxValue = 0
     const targetId = e.target.id.split(',')
@@ -98,13 +100,19 @@ export default function prepareGame(player, AI) {
       if(direction === 'right') {
         if(boxId[0] >= minValue && boxId[0] <= maxValue && boxId[1] === targetId[1]) {
           box.classList.add('contain-ship')
-          if(shipContainer.contains(beingDragged)) shipContainer.removeChild(beingDragged)
+          if(shipContainer.contains(beingDragged)) {
+            shipContainer.removeChild(beingDragged)
+            beingDragged = null
+          }
         }
 
       // if direction is down
       } else if(boxId[1] >= minValue && boxId[1] <= maxValue && boxId[0] === targetId[0]) {
         box.classList.add('contain-ship')
-        if(shipContainer.contains(beingDragged)) shipContainer.removeChild(beingDragged)
+        if(shipContainer.contains(beingDragged)) {
+          shipContainer.removeChild(beingDragged)
+          beingDragged = null
+        }
       }
     })
   }
