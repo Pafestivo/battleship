@@ -8,14 +8,12 @@ export default function startGame(player, AI) {
 
 
   // hide pre-game titles, show AI board
-  const placeShipsTitle = document.querySelector('.player > h1')
-  const changeDirectionBtn = document.querySelector('.direction')
-  const lengthIndicator = document.getElementById('length-indicator')
+  const shipList = document.querySelector('.ship-list')
+  const rotateBtn = document.getElementById('rotate')
   const AISide = document.querySelector('#AI-player')
-  placeShipsTitle.classList.add('hidden')
-  changeDirectionBtn.classList.add('hidden')
-  lengthIndicator.classList.add('hidden')
   AISide.classList.remove('hidden')
+  shipList.classList.add('hidden')
+  rotateBtn.classList.add('hidden')
 
   // reset the player board
   playerBoard.innerHTML = ""
