@@ -13,7 +13,8 @@
 
 .ship {
   display: flex;
-  
+  width: max-content;
+  cursor: move;
 }
 
 .square {
