@@ -94,7 +94,6 @@ export default function prepareGame(player, AI) {
     }
     // if target isn't a box after all that, abort the drag
     if(!target.classList.contains('box')) {
-      console.log(e.target)
       e.target.parentElement.style.position = "static"
       return
     } 
