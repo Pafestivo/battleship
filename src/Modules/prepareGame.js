@@ -83,14 +83,14 @@ export default function prepareGame(player, AI) {
     let target
     if(direction === 'right') {
       // check if there is a box a little higher than the dragged element
-      target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY + 20)
+      target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY + 13)
       // if not, check a little lower
-      if(!target.classList.contains('box')) target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY - 20)
+      if(!target.classList.contains('box')) target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY - 13)
     } else {
       // check a little right to the element
-      target = document.elementFromPoint(e.changedTouches[0].clientX + 20, e.changedTouches[0].clientY)
+      target = document.elementFromPoint(e.changedTouches[0].clientX + 13, e.changedTouches[0].clientY)
       // check a little left to the element
-      if(!target.classList.contains('box')) target = document.elementFromPoint(e.changedTouches[0].clientX - 20, e.changedTouches[0].clientY)
+      if(!target.classList.contains('box')) target = document.elementFromPoint(e.changedTouches[0].clientX - 13, e.changedTouches[0].clientY)
     }
     // if target isn't a box after all that, abort the drag
     if(!target.classList.contains('box')) {
