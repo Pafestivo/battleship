@@ -77,13 +77,11 @@ export default function prepareGame(player, AI) {
       maxValue = +targetId[1] + (beingDragged.id - hookPoint.id)
     }
 
-    console.log(minValue)
-    console.log(maxValue)
+
     // try to place ship
     if(direction === 'right') player.placeShip([minValue, +targetId[1]], direction, +beingDragged.id)
     else player.placeShip([+targetId[0], minValue], direction, +beingDragged.id)
-    console.log([+targetId[0], minValue])
-    console.log(+beingDragged.id)
+
     // checks if ship placed, abort if not
     if(player.gameBoard.ships.length > shipsPlaced) {
       shipsPlaced++
@@ -105,11 +103,9 @@ export default function prepareGame(player, AI) {
 
       // if direction is down
       } else if(boxId[1] >= minValue && boxId[1] <= maxValue && boxId[0] === targetId[0]) {
-        console.log('direction is down')
         box.classList.add('contain-ship')
         if(shipContainer.contains(beingDragged)) shipContainer.removeChild(beingDragged)
       }
     })
-    console.log(player.gameBoard.ships)
   }
 }
