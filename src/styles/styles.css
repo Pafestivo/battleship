@@ -31,6 +31,7 @@ body {
   background-color: #2389da;
   width: 500px;
   height: 500px;
+  margin-top: 12px;
   transition: all 0.1s ease-in-out;
 }
 
