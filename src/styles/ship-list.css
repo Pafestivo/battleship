@@ -1,10 +1,25 @@
 .ship-list {
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
   background-color: #2389da;
   width: 400px;
   height: 500px;
+  row-gap: 15px;
+}
+
+.ships-container-vertical {
+  display: flex;
+  column-gap: 40px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  padding: 0 40px;
+}
+
+.ships-container-horizontal {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  padding-left: 40px;
 }
 
 .ship-list h1 {
@@ -14,6 +29,7 @@
 .ship {
   display: flex;
   width: max-content;
+  height: max-content;
   cursor: move;
 }
 

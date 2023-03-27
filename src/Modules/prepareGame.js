@@ -15,10 +15,29 @@ export default function prepareGame(player, AI) {
   // drag and drop mechanics
   let direction = 'right'
   let shipsPlaced = 0
-  const shipList = document.querySelector('.ship-list')
+  const rotateBtn = document.getElementById('rotate')
+  const shipContainer = document.getElementById('ship-container')
   const ships = document.querySelectorAll('.ship')
   const boardBoxes = document.querySelectorAll('.box')
   const shipSquares = document.querySelectorAll('.square')
+
+  rotateBtn.addEventListener('click', () => {
+    if(direction === 'right') {
+      direction = 'down'
+      shipContainer.classList.remove('ships-container-horizontal')
+      shipContainer.classList.add('ships-container-vertical')
+      ships.forEach(ship => {
+        ship.style.flexDirection = "column"
+      })
+    } else {
+      direction = 'right'
+      shipContainer.classList.remove('ships-container-vertical')
+      shipContainer.classList.add('ships-container-horizontal')
+      ships.forEach(ship => {
+        ship.style.flexDirection = "row"
+      })
+    }
+  })
 
   boardBoxes.forEach(box => {
     box.addEventListener('dragover', dragOver)
@@ -61,11 +80,16 @@ export default function prepareGame(player, AI) {
     console.log(minValue)
     console.log(maxValue)
     // try to place ship
-    player.placeShip([minValue, +targetId[1]], direction, +beingDragged.id)
+    if(direction === 'right') player.placeShip([minValue, +targetId[1]], direction, +beingDragged.id)
+    else player.placeShip([+targetId[0], minValue], direction, +beingDragged.id)
+    console.log([+targetId[0], minValue])
+    console.log(+beingDragged.id)
     // checks if ship placed, abort if not
     if(player.gameBoard.ships.length > shipsPlaced) {
       shipsPlaced++
-    } else return
+    } else {
+      return
+    }
 
     boardBoxes.forEach(box => {
       // if end and start point are not in the same line, abort
@@ -76,13 +100,14 @@ export default function prepareGame(player, AI) {
       if(direction === 'right') {
         if(boxId[0] >= minValue && boxId[0] <= maxValue && boxId[1] === targetId[1]) {
           box.classList.add('contain-ship')
-          if(shipList.contains(beingDragged)) shipList.removeChild(beingDragged)
+          if(shipContainer.contains(beingDragged)) shipContainer.removeChild(beingDragged)
         }
 
       // if direction is down
       } else if(boxId[1] >= minValue && boxId[1] <= maxValue && boxId[0] === targetId[0]) {
+        console.log('direction is down')
         box.classList.add('contain-ship')
-        if(shipList.contains(beingDragged)) shipList.removeChild(beingDragged)
+        if(shipContainer.contains(beingDragged)) shipContainer.removeChild(beingDragged)
       }
     })
     console.log(player.gameBoard.ships)

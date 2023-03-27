@@ -60,7 +60,7 @@ export default function GameBoard() {
         }
         let chosenLocation = board.find(box => box.coordinates.every((coord, index) => coord === coordsCopy[index]))
         if(!chosenLocation) return 'No such coordinates'
-        if(!chosenLocation.available) return 'Some of the space is unavailable'
+        if(!chosenLocation.available) return `${chosenLocation.coordinates} is unavailable`
       }
 
       // creates the ship

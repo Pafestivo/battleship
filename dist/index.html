@@ -9,6 +9,7 @@
 </head>
 <body>
   <h1 id="page-title">Battleship</h1>
+  <button id="rotate">Rotate</button>
 
   <div id="game-container">
     <div class="player">
@@ -21,40 +22,42 @@
 
     <div class="ship-list">
       <h1>Drag ships to the board</h1>
-      <div id="5" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-        <div id="3" class="square"></div>
-        <div id="4" class="square"></div>
-        <div id="5" class="square"></div>
-      </div>
-      <div id="5" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-        <div id="3" class="square"></div>
-        <div id="4" class="square"></div>
-        <div id="5" class="square"></div>
-      </div>
-      <div id="3" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-        <div id="3" class="square"></div>
-      </div>
-      <div id="2" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-      </div>
-      <div id="2" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-      </div>
-      <div id="2" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-        <div id="2" class="square"></div>
-      </div>
-      <div id="1" class="ship" draggable="true">
-        <div id="1" class="square"></div>
-      </div>
+      <div id="ship-container" class="ships-container-horizontal">
+        <div id="5" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+          <div id="3" class="square"></div>
+          <div id="4" class="square"></div>
+          <div id="5" class="square"></div>
+        </div>
+        <div id="5" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+          <div id="3" class="square"></div>
+          <div id="4" class="square"></div>
+          <div id="5" class="square"></div>
+        </div>
+        <div id="3" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+          <div id="3" class="square"></div>
+        </div>
+        <div id="2" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+        </div>
+        <div id="2" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+        </div>
+        <div id="2" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+          <div id="2" class="square"></div>
+        </div>
+        <div id="1" class="ship" draggable="true">
+          <div id="1" class="square"></div>
+        </div>
+      </div><!--/ships-container-->
     </div><!--/ship-list-->
 
     <div id="AI-player" class="player hidden">
