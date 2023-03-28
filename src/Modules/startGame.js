@@ -1,26 +1,31 @@
-import { updateHitsApi, getHits, AddPlaceHolder } from "./mockAPI"
+import Player from "../constructors/Player"
+import { updatePlayerHitsAPI, updateAIHitsAPI, getPlayerHits, getAIHits } from "./JSON-server"
 
 export default async function startGame(player, AI) {
 
     // add a placeholder to the hits array in the server
-    await getHits(checkIfEmpty)
-    function checkIfEmpty(hits) {
-      if(hits.length === 0) {
-        AddPlaceHolder([], [])
-      } else {
-        // convert objects to arrays
-        const hitsArray = Object.values(hits[0])
-        const playerHits = Object.values(hitsArray[0])
-        const AIHits = Object.values(hitsArray[1])
+    await getPlayerHits(processPlayerHits)
+    await getAIHits(processAIHits)
+    function processPlayerHits(hits) {      
+      if(hits.length === 0) return
 
-        playerHits.forEach(hit => {
-          player.gameBoard.receiveAttack([hit[0], hit[1]])
-        })
+      // if there are hits, convert object to array
+      const hitsArray = Object.values(hits[0])
 
-        AIHits.forEach(hit => {
-          AI.gameBoard.receiveAttack([hit[0], hit[1]])
-        })
-      }
+      hitsArray.forEach(hit => {
+        player.gameBoard.receiveAttack([hit[0], hit[1]])
+      })
+    }
+
+    function processAIHits(hits) {      
+      if(hits.length === 0) return
+
+      // if there are hits, convert object to array
+      const hitsArray = Object.values(hits[0])
+
+      hitsArray.forEach(hit => {
+        AI.gameBoard.receiveAttack([hit[0], hit[1]])
+      })
     }
 
   // select the containers of each board
@@ -99,7 +104,6 @@ export default async function startGame(player, AI) {
           })
           // check if game is over
           isGameOver()
-          await updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
         }
       }
       else box.classList.add('attacked')
@@ -135,14 +139,17 @@ export default async function startGame(player, AI) {
           })
           // check if game is over
           isGameOver()
-          await updateHitsApi(player.gameBoard.hitLocations, AI.gameBoard.hitLocations)
         }
       } 
       else targetBox.classList.add('attacked')
+      // updates the APIs
+      await updatePlayerHitsAPI(1, player.gameBoard.hitLocations)
+      await updateAIHitsAPI(1, AI.gameBoard.hitLocations)
       updateShipsDetails()
     })
     AIBoard.append(box)
   }
+
 
   // add player details:
   const playerName = document.querySelector('#player-details h1')

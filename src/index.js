@@ -1,7 +1,7 @@
 import prepareGame from "./Modules/prepareGame";
 import AIplayer from "./constructors/AIplayer";
 import Player from "./constructors/Player";
-import { deleteShip, deleteLocations, getHits, getShips } from "./Modules/mockAPI";
+import { deleteShip, deletePlayerHits, deleteAIHits, getShips } from "./Modules/JSON-server";
 import './styles/styles.css'
 import './styles/winner-overlay.css'
 import './styles/prepare-game.css'
@@ -34,24 +34,20 @@ async function resetGame() {
   // delete the ships
   await getShips(remove)
   async function remove(ships) {
-    for(let i = 0; i <= ships.length; i++) {
-      if(ships[i]) deleteShip(ships[i].id)
+    const deletePromises = []
+    for(let i = 0; i <= ships.length - 1; i++) {
+      deletePromises.push(deleteShip(ships[i].id))
     }
+    await Promise.all(deletePromises)
   }
   
+  
   // delete the hits
-  await getHits(erase)
-  async function erase(hits) {
-    for(let i = 0; i <= hits.length; i++) {
-      if(hits[i]) deleteLocations(hits[i].id)
-    }
-  }
+  deleteAIHits(1)
+  await deletePlayerHits(1)
 
-  // re-enable buttons and restart game
-  playAgain.removeAttribute("disabled")
-  restartBtn.removeAttribute("disabled")
+  // restart game
   setTimeout(() => {
     window.location.reload()
   }, 700)
-  
 }

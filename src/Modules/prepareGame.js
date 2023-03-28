@@ -1,20 +1,11 @@
 import startGame from "./startGame";
-import { addShipToAPI, getShips, deleteShip } from "./mockAPI";
+import { addShipToAPI, getShips } from "./JSON-server";
 
 export default async function prepareGame(player, AI) {
 
   // if game is already in progress, skip the preparation part
   await getShips(check)
   function check(ships) {
-    // if for some reason there are more than 2 arrays, remove to make it 2
-    if(ships.length > 2) {
-      for(let i = ships.length; i >= 2; i--) {
-        deleteShip(i)
-        ships.pop()
-        console.log(ships.length)
-      }
-    }
-
     if(ships.length === 2) {
       // convert objects to arrays
       const playerShips = Object.values(ships[0])
@@ -109,7 +100,7 @@ export default async function prepareGame(player, AI) {
         })
       }
       if(!shipLens[currentShip]) {
-        addShipToAPI(player.gameBoard.ships)
+        addShipToAPI('1', player.gameBoard.ships)
         // create AI ships and start game
         AI.placeRandomShip(1) 
         AI.placeRandomShip(2) 
@@ -118,7 +109,7 @@ export default async function prepareGame(player, AI) {
         AI.placeRandomShip(3) 
         AI.placeRandomShip(5) 
         AI.placeRandomShip(5) 
-        addShipToAPI(AI.gameBoard.ships)
+        addShipToAPI('2', AI.gameBoard.ships)
         startGame(player, AI)
       }
     })
