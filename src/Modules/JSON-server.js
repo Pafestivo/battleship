@@ -1,6 +1,6 @@
-const shipsUrl = "http://localhost:3000/ships"
-const playerHitsUrl = "http://localhost:3000/playerHits"
-const AIHitsUrl = "http://localhost:3000/AIHits"
+const shipsUrl = "https://battleship-backend-gjrc.onrender.com/ships"
+const playerHitsUrl = "https://battleship-backend-gjrc.onrender.com/playerHits"
+const AIHitsUrl = "https://battleship-backend-gjrc.onrender.com/AIHits"
 const headers = {
   "Content-Type": "application/json"
 }
