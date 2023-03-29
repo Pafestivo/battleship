@@ -42,4 +42,8 @@
     font-size: 27px; 
     color: #FFF;
   }
+
+  .winner-overlay h1 {
+    font-size: 40px
+  }
 }
