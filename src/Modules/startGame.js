@@ -1,5 +1,4 @@
-import Player from "../constructors/Player"
-import { updatePlayerHitsAPI, updateAIHitsAPI, getPlayerHits, getAIHits } from "./JSON-server"
+import { updatePlayerHitsAPI, updateAIHitsAPI, getPlayerHits, getAIHits, playerPlaceHolder, AIPlaceHolder } from "./JSON-server"
 
 export default async function startGame(player, AI) {
 
@@ -7,7 +6,10 @@ export default async function startGame(player, AI) {
     await getPlayerHits(processPlayerHits)
     await getAIHits(processAIHits)
     function processPlayerHits(hits) {      
-      if(hits.length === 0) return
+      if(hits.length === 0) {
+        playerPlaceHolder()
+        return
+      }
 
       // if there are hits, convert object to array
       const hitsArray = Object.values(hits[0])
@@ -18,7 +20,10 @@ export default async function startGame(player, AI) {
     }
 
     function processAIHits(hits) {      
-      if(hits.length === 0) return
+      if(hits.length === 0) {
+        AIPlaceHolder()
+        return
+      }
 
       // if there are hits, convert object to array
       const hitsArray = Object.values(hits[0])

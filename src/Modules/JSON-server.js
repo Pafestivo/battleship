@@ -56,14 +56,51 @@ function deleteShip(itemID) {
   });
 }
 
-async function updatePlayerHitsAPI(id, hitsArray) {
+function playerPlaceHolder() {
   const payload = JSON.stringify({
-    id,
-    ...hitsArray})
-  await deletePlayerHits(1)
+    id: 1,
+    placeHolder: []})
 
   return fetch(playerHitsUrl, {
     method: "POST",
+    headers,
+    body: payload
+  })
+  .then(response => {
+    if(!response.ok) {
+      console.log("Failed to put placeHolder", response)
+    }
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
+function AIPlaceHolder() {
+  const payload = JSON.stringify({
+    id: 1,
+    placeHolder: []})
+
+  return fetch(AIHitsUrl, {
+    method: "POST",
+    headers,
+    body: payload
+  })
+  .then(response => {
+    if(!response.ok) {
+      console.log("Failed to put placeHolder", response)
+    }
+  })
+  .catch(error => {
+    console.log("Error: ", error)
+  })
+}
+
+async function updatePlayerHitsAPI(id, hitsArray) {
+  const payload = JSON.stringify(hitsArray)
+
+  return fetch(`${playerHitsUrl}/${id}`, {
+    method: "PUT",
     headers,
     body: payload
   })
@@ -78,13 +115,10 @@ async function updatePlayerHitsAPI(id, hitsArray) {
 }
 
 async function updateAIHitsAPI(id, hitsArray) {
-  const payload = JSON.stringify({
-    id,
-    ...hitsArray})
-  await deleteAIHits(1)
+  const payload = JSON.stringify(hitsArray)
 
-  return fetch(AIHitsUrl, {
-    method: "POST",
+  return fetch(`${AIHitsUrl}/${id}`, {
+    method: "PUT",
     headers,
     body: payload
   })
@@ -160,4 +194,4 @@ function deleteAIHits(id) {
   });
 }
 
-export { addShipToAPI, getShips, deleteShip, updatePlayerHitsAPI, updateAIHitsAPI, deletePlayerHits, getPlayerHits, getAIHits, deleteAIHits }
+export { addShipToAPI, getShips, deleteShip, updatePlayerHitsAPI, updateAIHitsAPI, deletePlayerHits, getPlayerHits, getAIHits, deleteAIHits, playerPlaceHolder, AIPlaceHolder }
